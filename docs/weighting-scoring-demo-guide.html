@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>TrueHire — Weighting &amp; Scoring Demo Guide</title>
+<style>
+  :root{
+    --navy:#0B2C45; --navy2:#16456b; --orange:#F5A623; --orange-d:#E07A14;
+    --ice:#E1EEF9; --line:#CBDBEA; --ink:#1F2937; --grey:#5B7184; --bg:#F4F7FB;
+    --good:#1E8E5A; --bad:#C0492F;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+       font-family:Calibri,'Segoe UI',Arial,sans-serif;line-height:1.5;}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 22px 80px;}
+  header.hero{background:linear-gradient(135deg,var(--navy),var(--navy2));
+       color:#fff;padding:34px 30px;border-radius:0 0 16px 16px;
+       box-shadow:0 8px 28px rgba(11,44,69,.22);}
+  .hero .kick{color:var(--orange);font-weight:700;letter-spacing:.12em;
+       text-transform:uppercase;font-size:12.5px;margin:0 0 8px;}
+  .hero h1{margin:0 0 8px;font-size:30px;font-weight:800;letter-spacing:-.01em;}
+  .hero p{margin:0;max-width:680px;font-size:15.5px;color:#D7E6F4;}
+  .hero .clock{display:inline-block;margin-top:16px;background:rgba(255,255,255,.12);
+       border:1px solid rgba(255,255,255,.25);border-radius:999px;
+       padding:7px 16px;font-weight:700;font-size:13px;}
+
+  h2{color:var(--navy);font-size:21px;margin:38px 0 6px;font-weight:800;}
+  h2 .num{display:inline-grid;place-items:center;width:30px;height:30px;
+       background:var(--orange);color:#fff;border-radius:8px;font-size:15px;
+       margin-right:10px;vertical-align:middle;}
+  .lead{color:var(--grey);margin:0 0 16px;font-size:14.5px;}
+
+  .card{background:#fff;border:1px solid var(--line);border-radius:14px;
+       padding:20px 22px;margin:14px 0;box-shadow:0 2px 10px rgba(16,44,69,.05);}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  @media(max-width:760px){.grid2{grid-template-columns:1fr}}
+
+  /* candidate ranking lists */
+  .rank{list-style:none;margin:0;padding:0;}
+  .rank li{display:flex;align-items:center;gap:12px;padding:9px 12px;border-radius:10px;
+       margin:7px 0;background:var(--bg);border:1px solid #E7EDF4;}
+  .rank li.top{background:#FFF6E6;border-color:#F6D79B;}
+  .pos{font-weight:800;color:var(--grey);width:20px;text-align:center;font-size:14px;}
+  .nm{flex:1;font-weight:600;color:var(--navy);}
+  .ring{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;
+       font-weight:800;font-size:15px;color:#fff;flex:none;}
+  .delta{font-size:12px;font-weight:700;padding:2px 8px;border-radius:999px;}
+  .up{color:var(--good);background:#E3F5EC;}
+  .down{color:var(--bad);background:#FBE8E3;}
+  .flat{color:var(--grey);background:#EEF2F7;}
+
+  .badge{display:inline-block;background:var(--ice);color:var(--navy);
+       border:1px solid var(--line);border-radius:999px;padding:3px 11px;
+       font-size:12.5px;font-weight:700;margin:2px 4px 2px 0;}
+
+  /* storyboard */
+  .scene{display:grid;grid-template-columns:96px 1fr;gap:0;margin:14px 0;
+       background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;
+       box-shadow:0 2px 10px rgba(16,44,69,.05);}
+  .scene .tc{background:var(--navy);color:#fff;padding:16px 10px;text-align:center;}
+  .scene .tc .t{font-weight:800;font-size:15px;}
+  .scene .tc .d{font-size:11px;color:#9FC0DC;margin-top:3px;letter-spacing:.04em;}
+  .scene .body{padding:15px 18px;}
+  .scene .what{font-weight:800;color:var(--navy);font-size:15.5px;margin:0 0 6px;}
+  .scene .do{margin:0 0 10px;font-size:13.5px;color:var(--ink);}
+  .scene .do b{color:var(--navy);}
+  .say{background:#FFF6E6;border-left:4px solid var(--orange);border-radius:0 8px 8px 0;
+       padding:9px 13px;font-size:14px;color:#5a4318;}
+  .say::before{content:"🎙 SAY";display:block;font-size:10.5px;font-weight:800;
+       letter-spacing:.12em;color:var(--orange-d);margin-bottom:3px;}
+  kbd{background:#fff;border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;
+       padding:1px 7px;font-family:Consolas,monospace;font-size:12.5px;color:var(--navy);}
+
+  table.math{border-collapse:collapse;width:100%;font-size:13.5px;margin-top:8px;}
+  table.math th,table.math td{border:1px solid var(--line);padding:7px 10px;text-align:left;}
+  table.math th{background:var(--ice);color:var(--navy);}
+  table.math td.r,table.math th.r{text-align:right;}
+  .chip5{color:var(--orange-d);font-weight:800;}
+
+  .check{list-style:none;margin:0;padding:0;}
+  .check li{padding:7px 0 7px 30px;position:relative;font-size:14px;border-bottom:1px dashed #E1E8F0;}
+  .check li:last-child{border-bottom:0;}
+  .check li::before{content:"";position:absolute;left:2px;top:9px;width:16px;height:16px;
+       border:2px solid var(--orange);border-radius:4px;}
+
+  .callout{background:#FDF3E7;border:1px solid #F3D6A8;border-radius:12px;padding:14px 18px;
+       margin:14px 0;font-size:13.5px;color:#6a4d22;}
+  .callout b{color:var(--orange-d);}
+  .mini{font-size:12.5px;color:var(--grey);}
+  .formula{font-family:Consolas,monospace;background:var(--navy);color:#E8F1FA;
+       padding:12px 16px;border-radius:10px;font-size:13.5px;margin:10px 0;overflow-x:auto;}
+  .formula .hl{color:var(--orange);}
+  footer{margin-top:46px;color:var(--grey);font-size:12px;text-align:center;}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap" style="padding:0;">
+    <p class="kick">TrueHire · Screen-recording script</p>
+    <h1>Weighted Match Scoring — 60–90s Demo Guide</h1>
+    <p>A scene-by-scene walkthrough for a short video that shows category weights
+       re-ranking real candidates. Every name, click, and number below comes from
+       your live demo data — follow it verbatim and the score flip lands on camera.</p>
+    <span class="clock">⏱ Target run time: ~75 seconds</span>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- THE HOOK -->
+  <h2><span class="num">★</span>The one-line story</h2>
+  <p class="lead">Under equal weighting, <b>James</b> is your top candidate. But the moment you
+     tell TrueHire that <b>Accountability</b> matters most for this role,
+     <b>David rockets from last place to first</b> — because that's exactly where he's strongest.
+     One number change, live, re-ranks the whole slate.</p>
+
+  <!-- DEMO DATA -->
+  <h2><span class="num">1</span>Your cast &amp; set</h2>
+  <p class="lead">Use this exact job and these three candidates — they already have submitted
+     evaluations, so scores are live.</p>
+  <div class="card">
+    <span class="badge">Job: Senior Software Engineer</span>
+    <span class="badge">Req #R101</span>
+    <span class="badge">Kit: Senior Software Engineer Interview Kit</span>
+    <span class="badge">7 categories</span>
+    <p class="mini" style="margin:12px 0 0;">All categories start at weight <b>1</b> (equal) — that's the
+       baseline you open on. The single change you'll make on camera is bumping
+       <b>Accountability</b> to <b>5</b>.</p>
+  </div>
+
+  <!-- BEFORE / AFTER -->
+  <h2><span class="num">2</span>The money shot — before &amp; after</h2>
+  <p class="lead">This is the reveal the whole video is built around. Cut between these two states.</p>
+  <div class="grid2">
+    <div class="card">
+      <div style="font-weight:800;color:var(--grey);font-size:13px;letter-spacing:.06em;margin-bottom:8px;">BEFORE · ALL WEIGHTS = 1</div>
+      <ul class="rank">
+        <li class="top"><span class="pos">1</span><span class="nm">James Nguyen</span><span class="ring" style="background:#1E8E5A">67</span></li>
+        <li><span class="pos">2</span><span class="nm">Maria Garcia</span><span class="ring" style="background:#5B9E3F">63</span></li>
+        <li><span class="pos">3</span><span class="nm">David Patel</span><span class="ring" style="background:#C99A18">60</span></li>
+      </ul>
+    </div>
+    <div class="card">
+      <div style="font-weight:800;color:var(--orange-d);font-size:13px;letter-spacing:.06em;margin-bottom:8px;">AFTER · ACCOUNTABILITY = 5</div>
+      <ul class="rank">
+        <li class="top"><span class="pos">1</span><span class="nm">David Patel</span><span class="ring" style="background:#1E8E5A">76</span><span class="delta up">▲ from 3rd</span></li>
+        <li><span class="pos">2</span><span class="nm">James Nguyen</span><span class="ring" style="background:#C99A18">56</span><span class="delta down">▼ from 1st</span></li>
+        <li><span class="pos">3</span><span class="nm">Maria Garcia</span><span class="ring" style="background:#C0492F">46</span><span class="delta down">▼ from 2nd</span></li>
+      </ul>
+    </div>
+  </div>
+  <p class="mini">Why it works: David scored a perfect <b>100</b> on Accountability (and was middling
+     elsewhere), while James was strong on the traits that now barely count. Weighting just makes the
+     score answer the right question: <i>strong at what matters for THIS role.</i></p>
+
+  <!-- PRE-FLIGHT -->
+  <h2><span class="num">3</span>Pre-flight (before you hit record)</h2>
+  <div class="card">
+    <ul class="check">
+      <li>Open <b>TrueHire.exe</b> and maximize the window — clean, full-screen capture.</li>
+      <li>Go to <b>Interview Kits → Senior Software Engineer Interview Kit</b>. In the
+          <b>Category weights</b> card, confirm <b>every box reads 1</b> (especially Accountability).
+          If one is changed from an earlier take, set it back to 1 and click away to save.</li>
+      <li>On the <b>Candidates</b> tab, set <b>Sort</b> to <b>Match Score</b> (it's the default) and
+          select the <b>Senior Software Engineer</b> job filter.</li>
+      <li>Confirm you see three rings: <b>James 67, Maria 63, David 60</b>. If so, you're ready.</li>
+    </ul>
+  </div>
+  <div class="callout"><b>Heads up — weights save instantly.</b> The weight box commits the moment you
+     click or tab away (it writes to the kit and re-scores everyone). That's great for the demo, but it
+     means <b>after each take you must reset Accountability back to 1</b> to re-run the reveal.</div>
+
+  <!-- STORYBOARD -->
+  <h2><span class="num">4</span>The storyboard</h2>
+  <p class="lead">Five beats, ~75 seconds. Narration is written to be read at a natural pace.</p>
+
+  <div class="scene">
+    <div class="tc"><div class="t">0:00</div><div class="d">0:12</div></div>
+    <div class="body">
+      <p class="what">Open on the candidate ranking</p>
+      <p class="do"><b>Candidates</b> tab, <b>Senior Software Engineer</b> filter, sorted by Match Score.
+         Let the three score rings sit on screen.</p>
+      <div class="say">"Here are three candidates for our Senior Software Engineer role. TrueHire scores each one from their interview ratings — right now James leads at 67, then Maria, then David at 60."</div>
+    </div>
+  </div>
+
+  <div class="scene">
+    <div class="tc"><div class="t">0:12</div><div class="d">0:22</div></div>
+    <div class="body">
+      <p class="what">Pose the question</p>
+      <p class="do">Hover/point at the three rings. Don't click yet.</p>
+      <div class="say">"But that treats every skill as equally important. What if, for this role, handling ambiguity matters far more than the rest? Let's tell TrueHire that."</div>
+    </div>
+  </div>
+
+  <div class="scene">
+    <div class="tc"><div class="t">0:22</div><div class="d">0:48</div></div>
+    <div class="body">
+      <p class="what">Open the kit and change one weight</p>
+      <p class="do">Go to <b>Interview Kits</b> → open <b>Senior Software Engineer Interview Kit</b> →
+         scroll to the <b>Category weights</b> card. In the <b>Accountability</b> box,
+         change <kbd>1</kbd> to <kbd>5</kbd>, then click an empty area to commit. Pause on the live
+         <b>Effective %</b> column updating — Tolerance jumps to about <b>45%</b>.</p>
+      <div class="say">"Each category has a weight. I'll bump Accountability from 1 to 5 — and watch the effective weight on the right update live. It's now about 45% of the whole score. That's it — one number."</div>
+    </div>
+  </div>
+
+  <div class="scene">
+    <div class="tc"><div class="t">0:48</div><div class="d">1:06</div></div>
+    <div class="body">
+      <p class="what">Return for the reveal</p>
+      <p class="do">Back to <b>Candidates</b> (Senior Software Engineer filter). The cards have re-ranked:
+         <b>David is now #1 at 76</b>, James 56, Maria 46.</p>
+      <div class="say">"Back on the candidates — and the order has flipped. David, who was dead last, is now our strongest match at 76, because he aced exactly the skill we said matters most. James dropped, because his strengths were elsewhere."</div>
+    </div>
+  </div>
+
+  <div class="scene">
+    <div class="tc"><div class="t">1:06</div><div class="d">1:15</div></div>
+    <div class="body">
+      <p class="what">Land the point</p>
+      <p class="do">Rest on David's card / the new ranking.</p>
+      <div class="say">"Same interviews, same ratings — TrueHire just scores them against what the job actually needs. Weight your categories, and the right candidate rises to the top."</div>
+    </div>
+  </div>
+
+  <!-- THE MATH -->
+  <h2><span class="num">5</span>The math behind it (for the curious / a follow-up clip)</h2>
+  <div class="grid2">
+    <div class="card">
+      <div style="font-weight:800;color:var(--navy);margin-bottom:6px;">How a rating becomes a score</div>
+      <p class="mini" style="margin:0 0 8px;">Each skill is rated on a <b>0–5 evidence scale</b>, where <b>5 = strongest evidence present</b>.
+         A rating of 0 (insufficient) or unrated is dropped as missing data.</p>
+      <table class="math">
+        <tr><th>Rating</th><th>Meaning</th><th class="r">Score</th></tr>
+        <tr><td>5</td><td>Very strong evidence present</td><td class="r">100</td></tr>
+        <tr><td>4</td><td>Strong evidence present</td><td class="r">80</td></tr>
+        <tr><td>3</td><td>Some evidence present</td><td class="r">60</td></tr>
+        <tr><td>2</td><td>Strong evidence <i>not</i> present</td><td class="r">40</td></tr>
+        <tr><td>1</td><td>Very strong evidence <i>not</i> present</td><td class="r">20</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <div style="font-weight:800;color:var(--navy);margin-bottom:6px;">How weights combine them</div>
+      <p class="mini" style="margin:0 0 6px;">The match score is a <b>weighted average</b> of the category
+         scores. Unrated categories simply drop out and the remaining weights renormalize — so a missing
+         rating never silently counts as a zero.</p>
+      <div class="formula">score = <span class="hl">Σ(weight × categoryScore)</span> ÷ Σ(weight)</div>
+      <p class="mini" style="margin:0;">Worked example — <b>David</b> with Accountability at weight 5
+         (other six at weight 1): his 100 on Tolerance now carries 5× the pull of any other skill, lifting
+         his blend from 60 to <b class="chip5">76</b>.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div style="font-weight:800;color:var(--navy);margin-bottom:8px;">David's categories — why weight 5 lifts him</div>
+    <table class="math">
+      <tr><th>Category</th><th class="r">David's score</th><th class="r">Weight = 1</th><th class="r">Weight = 5</th></tr>
+      <tr><td><b>Accountability</b></td><td class="r"><b>100</b></td><td class="r">counts once</td><td class="r"><span class="chip5">counts 5×</span></td></tr>
+      <tr><td>Problem Solving · Decision Making</td><td class="r">60 · 60</td><td class="r">—</td><td class="r">—</td></tr>
+      <tr><td>Adaptability & Resilience</td><td class="r">80</td><td class="r">—</td><td class="r">—</td></tr>
+      <tr><td>Communication · Collaboration</td><td class="r">40 · 20</td><td class="r">—</td><td class="r">—</td></tr>
+      <tr><td colspan="2"><b>Blended match score</b></td><td class="r"><b>60</b></td><td class="r"><b class="chip5">76</b></td></tr>
+    </table>
+    <p class="mini" style="margin:8px 0 0;">(The kit's 7th category isn't rated for these candidates, so it never affects the score.)</p>
+  </div>
+
+  <!-- RESET -->
+  <h2><span class="num">↺</span>Reset after recording</h2>
+  <div class="card">
+    <p style="margin:0 0 8px;">Your demo permanently changed the kit. To restore the baseline (or before another take):</p>
+    <ul class="check">
+      <li>Interview Kits → Senior Software Engineer Interview Kit → Category weights →
+          set <b>Accountability</b> back to <kbd>1</kbd>, click away to save.</li>
+      <li>Re-check the Candidates tab shows <b>67 / 63 / 60</b> again.</li>
+    </ul>
+  </div>
+
+  <footer>TrueHire demo guide · numbers verified against live data on this machine · generated for a ~60–90s screen recording</footer>
+</div>
+</body>
+</html>

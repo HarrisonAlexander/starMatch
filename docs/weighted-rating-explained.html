@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TrueHire — How the Weighted Match Score Works</title>
+<style>
+  :root{
+    --navy:#0B2C45; --blue:#1565C0; --blue-soft:#E1EEF9;
+    --green:#2A8E54; --green-soft:#E5F4EC; --orange:#C77000; --orange-soft:#FFF1DF;
+    --red:#B23A3A; --ink:#2C3E50; --muted:#6B7B8C; --line:#E3E9F0; --bg:#F7F9FC;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:820px; margin:0 auto; padding:0 22px 90px}
+  header.hero{
+    background:linear-gradient(135deg,#0B2C45 0%,#15436B 100%);
+    color:#fff; padding:54px 22px 60px; margin-bottom:-28px;
+  }
+  header.hero .inner{max-width:820px;margin:0 auto}
+  .kicker{
+    text-transform:uppercase; letter-spacing:.14em; font-size:12px; font-weight:700;
+    color:#9FC4E8; margin:0 0 10px;
+  }
+  header.hero h1{margin:0 0 12px; font-size:34px; line-height:1.2; font-weight:800}
+  header.hero p{margin:0; font-size:18px; color:#CFE0F0; max-width:640px}
+  .card{
+    background:#fff; border:1px solid var(--line); border-radius:14px;
+    padding:26px 28px; margin:22px 0; box-shadow:0 1px 3px rgba(11,44,69,.05);
+  }
+  h2{font-size:23px; color:var(--navy); margin:6px 0 14px; font-weight:750}
+  h3{font-size:17px; color:var(--navy); margin:22px 0 8px}
+  p{margin:0 0 14px}
+  .lead{font-size:18px}
+  .muted{color:var(--muted)}
+  .pill{
+    display:inline-block; padding:2px 10px; border-radius:11px; font-size:12.5px;
+    font-weight:700; vertical-align:middle;
+  }
+  .pill.blue{background:var(--blue-soft); color:var(--blue)}
+  .pill.green{background:var(--green-soft); color:var(--green)}
+  .pill.orange{background:var(--orange-soft); color:var(--orange)}
+  table{width:100%; border-collapse:collapse; margin:10px 0 6px; font-size:15px}
+  th,td{padding:9px 12px; text-align:left; border-bottom:1px solid var(--line)}
+  th{font-size:12.5px; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); font-weight:700}
+  td.num{font-variant-numeric:tabular-nums; font-weight:600}
+  .scoreband{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:7px;vertical-align:middle}
+  .callout{
+    border-left:4px solid var(--blue); background:#F2F8FE; border-radius:0 10px 10px 0;
+    padding:14px 18px; margin:18px 0; font-size:15.5px;
+  }
+  .callout.green{border-color:var(--green); background:#EEF8F1}
+  .callout b{color:var(--navy)}
+  .formula{
+    background:#0B2C45; color:#EaF2FA; border-radius:11px; padding:18px 20px;
+    font:15px/1.7 "SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;
+    overflow-x:auto; margin:14px 0;
+  }
+  .formula .hi{color:#FFD27A}
+  .formula .dim{color:#8FB2D4}
+  .steps{counter-reset:step; list-style:none; padding:0; margin:8px 0}
+  .steps li{
+    position:relative; padding:4px 0 16px 46px; margin:0;
+  }
+  .steps li::before{
+    counter-increment:step; content:counter(step);
+    position:absolute; left:0; top:0; width:30px; height:30px; border-radius:50%;
+    background:var(--blue); color:#fff; font-weight:700; font-size:15px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .bar-row{display:flex; align-items:center; gap:12px; margin:7px 0}
+  .bar-label{width:165px; font-weight:600; font-size:14.5px}
+  .bar-track{flex:1; height:18px; background:#EDF0F4; border-radius:9px; overflow:hidden}
+  .bar-fill{height:100%; border-radius:9px; background:var(--blue);
+    display:flex; align-items:center; justify-content:flex-end; color:#fff;
+    font-size:12px; font-weight:700; padding-right:8px}
+  .bar-val{width:52px; text-align:right; font-weight:700; font-variant-numeric:tabular-nums}
+  .result{
+    text-align:center; padding:22px; margin:8px 0;
+    background:var(--green-soft); border-radius:12px; border:1px solid #BfE3CC;
+  }
+  .result .big{font-size:46px; font-weight:800; color:var(--green); line-height:1}
+  .result .sub{color:#3A7A55; font-weight:600; margin-top:4px}
+  .compare{display:flex; gap:16px; flex-wrap:wrap; margin-top:10px}
+  .compare .box{flex:1; min-width:200px; text-align:center; border:1px solid var(--line); border-radius:11px; padding:16px}
+  .compare .box .n{font-size:32px; font-weight:800; line-height:1}
+  .compare .box.unweighted .n{color:var(--muted)}
+  .compare .box.weighted .n{color:var(--green)}
+  .compare .box .t{font-size:13px; color:var(--muted); margin-top:6px; text-transform:uppercase; letter-spacing:.04em; font-weight:700}
+  .tldr{background:var(--navy); color:#fff; border:none}
+  .tldr h2{color:#fff}
+  .tldr ul{margin:0; padding-left:20px}
+  .tldr li{margin:8px 0; color:#D9E6F2}
+  .tldr li b{color:#fff}
+  footer{color:var(--muted); font-size:13px; text-align:center; margin-top:30px}
+  .toc{font-size:14.5px}
+  .toc a{color:var(--blue); text-decoration:none; font-weight:600}
+  .toc a:hover{text-decoration:underline}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="inner">
+    <p class="kicker">TrueHire · Interviewing Guide</p>
+    <h1>How the Weighted Match Score Works</h1>
+    <p>A plain-English guide to scoring candidates when some skills matter more than others.</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="card">
+    <p class="lead"><b>The short version:</b> A candidate's <b>Match Score</b> is just an average
+    of how well they did across the skill categories you interviewed them on — but now you can tell
+    TrueHire that some categories count for more than others. Rate a software engineer strongly on
+    <i>Technical Engineering</i> and you can make that skill drive most of the score, while
+    <i>Problem Solving</i> nudges it only a little.</p>
+    <p class="muted toc">Jump to:
+      <a href="#step1">Scoring one category</a> ·
+      <a href="#step2">Why weights</a> ·
+      <a href="#step3">How weights work</a> ·
+      <a href="#example">Worked example</a> ·
+      <a href="#missing">Skipped ratings</a> ·
+      <a href="#tldr">Takeaways</a></p>
+  </div>
+
+  <!-- STEP 1 -->
+  <div class="card" id="step1">
+    <h2>1. First, each category gets a score</h2>
+    <p>During an interview, the hiring manager rates the candidate on each skill category using a
+    simple <b>0&ndash;5 scale</b>, based on how much evidence they saw for that skill. TrueHire turns
+    that rating into a 0&ndash;100 score:</p>
+
+    <table>
+      <thead>
+        <tr><th>You select</th><th>What it means</th><th>Becomes</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="num">5</td><td>Very strong evidence the skill <b>is</b> present</td><td class="num"><span class="scoreband" style="background:#2A8E54"></span>100</td></tr>
+        <tr><td class="num">4</td><td>Strong evidence it is present</td><td class="num"><span class="scoreband" style="background:#38B66E"></span>80</td></tr>
+        <tr><td class="num">3</td><td>Some evidence it is present</td><td class="num"><span class="scoreband" style="background:#F5A623"></span>60</td></tr>
+        <tr><td class="num">2</td><td>Strong evidence it is <b>not</b> present</td><td class="num"><span class="scoreband" style="background:#E08A4B"></span>40</td></tr>
+        <tr><td class="num">1</td><td>Very strong evidence it is not present</td><td class="num"><span class="scoreband" style="background:#DC4C4C"></span>20</td></tr>
+        <tr><td class="num">0</td><td>Not enough evidence either way</td><td class="muted">not counted</td></tr>
+      </tbody>
+    </table>
+    <p class="muted" style="font-size:14px">Higher number = stronger evidence the candidate has the skill.
+    A <b>0</b> ("not enough evidence") and a category you simply leave blank are treated as
+    <i>missing information</i> — they don't drag the score down, they just sit out. (More on that
+    <a href="#missing">below</a>.)</p>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="card" id="step2">
+    <h2>2. The problem weights solve</h2>
+    <p>Without weights, every category counts <b>equally</b>. So a brilliant showing on
+    <i>Technical Engineering</i> counts exactly as much as a brilliant showing on
+    <i>Problem Solving</i> — even when you're hiring an engineer and technical skill is the whole point.</p>
+    <div class="callout">
+      <b>Weights let you say "this skill matters more."</b> You decide how important each category is
+      for <i>this particular job</i>, and the Match Score listens.
+    </div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="card" id="step3">
+    <h2>3. How you set weights</h2>
+    <p>When you build an interview kit, each category gets a <b>weight</b> — just a number for how
+    important it is, relative to the others. You don't have to make them add up to anything tidy.
+    Type whatever feels right:</p>
+
+    <ul class="steps">
+      <li>Give the skills that matter most a <b>bigger number</b> (say <b>5</b>), and the minor ones a
+      <b>smaller number</b> (say <b>1</b> or <b>2</b>).</li>
+      <li>TrueHire instantly converts those numbers into <b>percentages</b> that always add up to
+      100% — shown live next to each category as the <span class="pill blue">Effective %</span>.</li>
+      <li>Add or remove a category and the percentages re-balance themselves automatically. No math on
+      your end.</li>
+    </ul>
+
+    <div class="callout green">
+      <b>Example:</b> weights of <b>5, 2, 2, 1</b> (total = 10) become
+      <b>50% · 20% · 20% · 10%</b>. The same balance comes from
+      <b>10, 4, 4, 2</b> — only the <i>ratio</i> between the numbers matters, not their size.
+    </div>
+  </div>
+
+  <!-- WORKED EXAMPLE -->
+  <div class="card" id="example">
+    <h2>4. A worked example</h2>
+    <p>You're interviewing for a <b>Software Engineer</b>. Technical skill is by far the most important,
+    so you set the weights like this:</p>
+
+    <table>
+      <thead><tr><th>Category</th><th>Weight</th><th>Effective %</th></tr></thead>
+      <tbody>
+        <tr><td>Technical Engineering</td><td class="num">5</td><td><span class="pill blue">50%</span></td></tr>
+        <tr><td>Adaptability & Resilience</td><td class="num">2</td><td><span class="pill blue">20%</span></td></tr>
+        <tr><td>Leadership</td><td class="num">2</td><td><span class="pill blue">20%</span></td></tr>
+        <tr><td>Problem Solving</td><td class="num">1</td><td><span class="pill blue">10%</span></td></tr>
+      </tbody>
+    </table>
+
+    <h3>Now you interview a candidate and rate them:</h3>
+    <table>
+      <thead><tr><th>Category</th><th>Your rating</th><th>Category score</th><th>Its weight</th></tr></thead>
+      <tbody>
+        <tr><td>Technical Engineering</td><td class="num">5</td><td class="num">100</td><td class="num">×5</td></tr>
+        <tr><td>Adaptability & Resilience</td><td class="num">4</td><td class="num">80</td><td class="num">×2</td></tr>
+        <tr><td>Leadership</td><td class="num">3</td><td class="num">60</td><td class="num">×2</td></tr>
+        <tr><td>Problem Solving</td><td class="num">3</td><td class="num">60</td><td class="num">×1</td></tr>
+      </tbody>
+    </table>
+
+    <h3>TrueHire multiplies each score by its weight, then divides by the total weight:</h3>
+    <div class="formula">
+(<span class="hi">5</span>×100 + <span class="hi">2</span>×80 + <span class="hi">2</span>×60 + <span class="hi">1</span>×60) ÷ (<span class="hi">5</span>+<span class="hi">2</span>+<span class="hi">2</span>+<span class="hi">1</span>)
+<span class="dim">= (500 + 160 + 120 + 60) ÷ 10</span>
+<span class="dim">= 840 ÷ 10</span>
+= <span class="hi">84</span>
+    </div>
+
+    <div class="result">
+      <div class="big">84%</div>
+      <div class="sub">Weighted Match Score</div>
+    </div>
+
+    <h3>Why weighting matters here</h3>
+    <p>If every category counted equally, this same candidate would score a plain average of
+    <b>(100 + 80 + 60 + 60) ÷ 4 = 75</b>. Because they were <i>strongest exactly where it counts most</i>
+    (Technical), weighting lifts their score to <b>84</b> — a more honest reflection of how good a fit
+    they are for <i>this</i> role.</p>
+
+    <div class="compare">
+      <div class="box unweighted"><div class="n">75%</div><div class="t">Equal weighting</div></div>
+      <div class="box weighted"><div class="n">84%</div><div class="t">Weighted for this job</div></div>
+    </div>
+  </div>
+
+  <!-- MISSING -->
+  <div class="card" id="missing">
+    <h2>5. What if a skill wasn't rated?</h2>
+    <p>Sometimes an interviewer doesn't get to assess a category — they leave it blank or mark it
+    <b>0</b> ("not enough evidence"). TrueHire handles this fairly: the missing category simply
+    <b>steps out</b>, and the remaining categories' weights re-balance among themselves. The score only
+    ever reflects what you <i>actually</i> judged.</p>
+
+    <p class="muted">Say <i>Leadership</i> went unrated in the example above. TrueHire just drops it and
+    re-shares the weight across the other three:</p>
+    <div class="formula">
+(<span class="hi">5</span>×100 + <span class="hi">2</span>×80 + <span class="hi">1</span>×60) ÷ (<span class="hi">5</span>+<span class="hi">2</span>+<span class="hi">1</span>)
+<span class="dim">= 720 ÷ 8</span>
+= <span class="hi">90</span>
+    </div>
+    <p>No penalty for the skipped skill, no guessing — it's as if that category was never on the list
+    for that candidate.</p>
+
+    <div class="callout">
+      <b>A candidate with no submitted ratings at all</b> simply shows <b>“—”</b> (no score yet),
+      not a zero. "Not measured" and "measured poorly" are kept clearly separate.
+    </div>
+  </div>
+
+  <!-- TLDR -->
+  <div class="card tldr" id="tldr">
+    <h2>The takeaways</h2>
+    <ul>
+      <li><b>Every category is scored 0&ndash;100</b> from a simple 0&ndash;5 evidence rating.</li>
+      <li><b>Weights let you say which skills matter most</b> for a given job — just type bigger numbers
+      for more important categories.</li>
+      <li><b>The Match Score is a weighted average:</b> each category's score counts in proportion to its
+      weight, and the percentages always total 100%.</li>
+      <li><b>Skipped or unrated categories drop out</b> and the rest re-balance — the score reflects only
+      what you actually assessed.</li>
+      <li><b>Nothing changes for existing kits</b> until you set unequal weights. Leave everything equal
+      and scores behave exactly as before.</li>
+      <li><b>Where to set it:</b> open an interview kit and use the
+      <span class="pill green">Category weights</span> panel above the questions.</li>
+    </ul>
+  </div>
+
+  <footer>
+    TrueHire · Weighted Match Scoring &nbsp;•&nbsp; The Match Score appears on the Candidates list and in the Excel export.
+  </footer>
+
+</div>
+</body>
+</html>

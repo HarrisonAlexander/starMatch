@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 460" width="100%" role="img" aria-labelledby="t d">
+  <title id="t">TrueHire workflow</title>
+  <desc id="d">Four steps joined like a constellation: open a requisition, build the interview kit, evaluate each candidate on a 0 to 5 evidence scale, then rank candidates and print handouts and rating sheets.</desc>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0B2C45"/>
+      <stop offset="1" stop-color="#1E2A5C"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#F5A623" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#F5A623" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="frame"><rect width="1200" height="460" rx="24"/></clipPath>
+  </defs>
+
+  <g clip-path="url(#frame)">
+    <rect width="1200" height="460" fill="url(#sky)"/>
+    <g fill="#FFFFFF" opacity="0.55">
+      <circle cx="74" cy="46" r="1.6"/><circle cx="212" cy="98" r="1.2"/><circle cx="388" cy="40" r="1.4"/>
+      <circle cx="560" cy="86" r="1.1"/><circle cx="702" cy="34" r="1.6"/><circle cx="858" cy="72" r="1.2"/>
+      <circle cx="1010" cy="38" r="1.5"/><circle cx="1140" cy="96" r="1.2"/><circle cx="1166" cy="430" r="1.4"/>
+      <circle cx="36" cy="430" r="1.2"/><circle cx="604" cy="440" r="1.1"/>
+    </g>
+
+    <text x="60" y="78" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="18" font-weight="600" letter-spacing="3" fill="#F5A623">HOW IT WORKS</text>
+    <text x="60" y="122" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="36" font-weight="700" fill="#F7F4EC">From requisition to ranked shortlist</text>
+
+    <polyline points="160,214 460,190 760,226 1060,182" fill="none" stroke="#F5A623" stroke-width="2" stroke-opacity="0.7" stroke-dasharray="2 8" stroke-linecap="round"/>
+
+    <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">
+      <circle cx="160" cy="214" r="26" fill="url(#glow)"/>
+      <circle cx="160" cy="214" r="7" fill="#F7F4EC"/>
+      <rect x="40" y="252" width="250" height="160" rx="16" fill="#FFFFFF" fill-opacity="0.07" stroke="#FFFFFF" stroke-opacity="0.16"/>
+      <text x="62" y="290" font-size="18" font-weight="700" fill="#F5A623">01</text>
+      <text x="62" y="322" font-size="24" font-weight="700" fill="#F7F4EC">Open a requisition</text>
+      <text x="62" y="354" font-size="18" fill="#B9C6D6">Title, hiring manager,</text>
+      <text x="62" y="380" font-size="18" fill="#B9C6D6">openings and status</text>
+
+      <circle cx="460" cy="190" r="26" fill="url(#glow)"/>
+      <circle cx="460" cy="190" r="7" fill="#F7F4EC"/>
+      <rect x="340" y="252" width="250" height="160" rx="16" fill="#FFFFFF" fill-opacity="0.07" stroke="#FFFFFF" stroke-opacity="0.16"/>
+      <text x="362" y="290" font-size="18" font-weight="700" fill="#F5A623">02</text>
+      <text x="362" y="322" font-size="24" font-weight="700" fill="#F7F4EC">Build the kit</text>
+      <text x="362" y="354" font-size="18" fill="#B9C6D6">Tick questions from 65,</text>
+      <text x="362" y="380" font-size="18" fill="#B9C6D6">weight each category</text>
+
+      <circle cx="760" cy="226" r="26" fill="url(#glow)"/>
+      <circle cx="760" cy="226" r="7" fill="#F7F4EC"/>
+      <rect x="640" y="252" width="250" height="160" rx="16" fill="#FFFFFF" fill-opacity="0.07" stroke="#FFFFFF" stroke-opacity="0.16"/>
+      <text x="662" y="290" font-size="18" font-weight="700" fill="#F5A623">03</text>
+      <text x="662" y="322" font-size="24" font-weight="700" fill="#F7F4EC">Evaluate</text>
+      <text x="662" y="354" font-size="18" fill="#B9C6D6">Rate every category</text>
+      <text x="662" y="380" font-size="18" fill="#B9C6D6">0–5, with notes</text>
+
+      <circle cx="1060" cy="182" r="40" fill="url(#glow)"/>
+      <path d="M1060 162 l5.9 12.1 13.3 1.9 -9.6 9.4 2.3 13.2 -11.9 -6.3 -11.9 6.3 2.3 -13.2 -9.6 -9.4 13.3 -1.9z" fill="#F5A623"/>
+      <rect x="940" y="252" width="230" height="160" rx="16" fill="#F5A623" fill-opacity="0.12" stroke="#F5A623" stroke-opacity="0.55"/>
+      <text x="962" y="290" font-size="18" font-weight="700" fill="#F5A623">04</text>
+      <text x="962" y="322" font-size="24" font-weight="700" fill="#F7F4EC">Rank &amp; print</text>
+      <text x="962" y="354" font-size="18" fill="#B9C6D6">“1st of 4” by weighted</text>
+      <text x="962" y="380" font-size="18" fill="#B9C6D6">evidence, + handouts</text>
+    </g>
+  </g>
+</svg>

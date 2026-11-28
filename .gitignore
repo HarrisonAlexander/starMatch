@@ -1,0 +1,20 @@
+# Runtime output (written next to TrueHire.ps1)
+logs/
+outputs/
+
+# Working data in portable mode (portable.flag) or next to the built exe
+userdata/
+portable.flag
+
+# Build output - attach TrueHire.exe to a GitHub Release instead of committing it
+dist/
+
+# Optional vendored dependency used by Run-TrueHire.cmd
+Modules/
+
+# Windows
+desktop.ini
+Thumbs.db
+
+# Python bytecode
+__pycache__/

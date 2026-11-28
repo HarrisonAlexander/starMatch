@@ -1,0 +1,48 @@
+{
+  "orgName": "Your Organization",
+  "orgEmail": "hr@example.com",
+  "orgIndustry": "",
+  "orgDomain": "www.example.com",
+  "orgAddress": "",
+
+  "primaryColor": "#0B2C45",
+  "accentColor": "#F5A623",
+  "defaultLocation": "",
+  "defaultHiringManager": "",
+  "defaultRecruiter": "HR Recruitment Team",
+
+  "appPreferences": {
+    "showRoleOnDashboard": true,
+    "autoSave": true,
+    "realtimeUpdates": true,
+    "emailDigest": false,
+    "darkMode": false,
+    "language": "English (US)",
+    "sessionTimeout": "30 minutes"
+  },
+
+  "kitDefaults": {
+    "ratingScale": "1-7 (Standard)",
+    "requiredCategories": "5",
+    "defaultQuestionType": "Behavioral"
+  },
+
+  "dateTime": {
+    "timezone": "(UTC-05:00) Eastern Time (US & Canada)",
+    "dateFormat": "MM/DD/YYYY",
+    "timeFormat": "12 Hour (1:00 PM)"
+  },
+
+  "fileUpload": {
+    "maxSize": "25 MB",
+    "allowedTypes": [".PDF", ".DOC", ".DOCX", ".XLSX", ".TXT"]
+  },
+
+  "currentUser": {
+    "name": "",
+    "role": "",
+    "email": ""
+  },
+
+  "lastExportDir": ""
+}

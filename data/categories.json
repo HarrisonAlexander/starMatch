@@ -1,0 +1,529 @@
+{
+  "anchors": [
+    "Insufficient evidence for or against skill",
+    "Very strong evidence skill NOT present",
+    "Strong evidence skill NOT present",
+    "Some evidence skill IS present",
+    "Strong evidence skill IS present",
+    "Very strong evidence skill IS present"
+  ],
+  "recommendationReasons": [
+    "DO Hire",
+    "DO Promote",
+    "DO NOT Hire",
+    "DO NOT Promote"
+  ],
+  "recommendationValues": [
+    "Select",
+    "Non-Select"
+  ],
+  "categories": [
+    {
+      "id": "Problem_Solving",
+      "name": "Problem Solving",
+      "displayName": "Problem Solving",
+      "description": "Breaks a problem down, finds the real cause, weighs options and fixes it in a way that lasts.",
+      "custom": false,
+      "questions": [
+        {
+          "index": 1,
+          "score": "1",
+          "probe": "Tell me about a difficult problem you solved at work or school. Walk me through how you figured out what was really going on.",
+          "guide": "Did the candidate gather facts, separate symptoms from the root cause and test their thinking before acting? Was there guessing, jumping to the first answer, or a fix that only treated the symptom?"
+        },
+        {
+          "index": 2,
+          "score": "2",
+          "probe": "Describe a time a process or tool you relied on kept failing. What did you do about it?",
+          "guide": "Did the candidate look for the pattern behind the failures and put a lasting fix in place? Was there repeated workarounds, waiting for someone else to fix it, or blaming the tool?"
+        },
+        {
+          "index": 3,
+          "score": "3",
+          "probe": "Give me an example of a problem where you did not have all the information you needed. How did you move forward?",
+          "guide": "Did the candidate identify what was missing, find it or make reasonable, stated assumptions, and check them later? Was there stalling, or acting on assumptions they never verified?"
+        },
+        {
+          "index": 4,
+          "score": "4",
+          "probe": "Tell me about a time you used data or evidence to change how something was done.",
+          "guide": "Did the candidate choose relevant data, read it honestly and use it to make a specific, measurable change? Was there cherry-picking, vague results, or data used only to justify a decision already made?"
+        },
+        {
+          "index": 5,
+          "score": "5",
+          "probe": "Describe the most creative solution you have come up with to a problem. How did you get there?",
+          "guide": "Did the candidate look beyond the obvious, test the idea, and show it actually worked? Was the idea novel but impractical, or never carried through?"
+        }
+      ]
+    },
+    {
+      "id": "Communication",
+      "name": "Communication",
+      "displayName": "Communication",
+      "description": "Shares information clearly and concisely in speech and writing, adapts to the audience, and listens to understand.",
+      "custom": false,
+      "questions": [
+        {
+          "index": 1,
+          "score": "6",
+          "probe": "Tell me about a time you had to explain something complicated to someone without your background. How did you make sure they understood?",
+          "guide": "Did the candidate adjust language and detail to the listener, use examples, and check for understanding? Was there jargon, talking down, or assuming silence meant agreement?"
+        },
+        {
+          "index": 2,
+          "score": "7",
+          "probe": "Describe a time a misunderstanding caused a problem. What happened and what did you change afterward?",
+          "guide": "Did the candidate own their part, fix the immediate issue and change how they communicate? Was there blame placed only on others, or no lasting change?"
+        },
+        {
+          "index": 3,
+          "score": "8",
+          "probe": "Give me an example of something important you wrote, such as a report, proposal or key email. How did you decide what to include?",
+          "guide": "Did the candidate think about the reader, lead with the key point, and structure and edit the piece? Was the writing unfocused, too long, or produced without regard for who would read it?"
+        },
+        {
+          "index": 4,
+          "score": "9",
+          "probe": "Tell me about a time you had to deliver unwelcome news. How did you handle it?",
+          "guide": "Did the candidate deliver the message promptly, honestly and with empathy, and offer a way forward? Was there delay, softening until the message was lost, or bluntness that damaged the relationship?"
+        },
+        {
+          "index": 5,
+          "score": "10",
+          "probe": "Describe a conversation where listening carefully changed your view or your next step.",
+          "guide": "Did the candidate show active listening: asking questions, reflecting back, and acting on what they learned? Was the story really about persuading others, with little evidence of listening?"
+        }
+      ]
+    },
+    {
+      "id": "Collaboration",
+      "name": "Collaboration",
+      "displayName": "Collaboration",
+      "description": "Works well with others toward shared goals, shares credit and information, and supports teammates.",
+      "custom": false,
+      "questions": [
+        {
+          "index": 1,
+          "score": "11",
+          "probe": "Tell me about a team project you are proud of. What was your specific role, and how did you help the team succeed?",
+          "guide": "Did the candidate describe a clear personal contribution while crediting others, and show they helped the group work well together? Was it vague 'we' with no personal role, or 'I' with no team?"
+        },
+        {
+          "index": 2,
+          "score": "12",
+          "probe": "Describe a time you worked with someone whose style was very different from yours. How did you make it work?",
+          "guide": "Did the candidate seek to understand the other person and adjust their own approach to get results? Was there avoidance, judging the other person, or expecting them to do all the adjusting?"
+        },
+        {
+          "index": 3,
+          "score": "13",
+          "probe": "Give me an example of when you helped a colleague who was struggling, even though it was not your job.",
+          "guide": "Did the candidate notice the need, offer help that was actually useful, and balance it with their own work? Was the help self-serving, or did it come at the cost of their own commitments?"
+        },
+        {
+          "index": 4,
+          "score": "14",
+          "probe": "Tell me about a time you needed help or resources from another team or department. How did you get them on board?",
+          "guide": "Did the candidate build the relationship, explain the shared benefit and follow through on their side? Was there escalation as a first resort, or demands without considering the other team's priorities?"
+        },
+        {
+          "index": 5,
+          "score": "15",
+          "probe": "Describe a situation where a team member was not pulling their weight. What did you do?",
+          "guide": "Did the candidate address it directly and respectfully, try to understand the cause, and involve others only when needed? Was there silent resentment, gossip, or quietly doing the other person's work?"
+        }
+      ]
+    },
+    {
+      "id": "Accountability",
+      "name": "Accountability",
+      "displayName": "Accountability",
+      "description": "Owns their commitments and results, admits mistakes, and follows through without being chased.",
+      "custom": false,
+      "questions": [
+        {
+          "index": 1,
+          "score": "16",
+          "probe": "Tell me about a mistake you made at work. What happened, and what did you do next?",
+          "guide": "Did the candidate own the mistake quickly, fix the impact, tell the right people and change something to prevent a repeat? Was there minimizing, blaming circumstances, or a 'mistake' that was really a strength in disguise?"
+        },
+        {
+          "index": 2,
+          "score": "17",
+          "probe": "Describe a time you missed a deadline or commitment. How did you handle it?",
+          "guide": "Did the candidate flag the risk early, renegotiate honestly and limit the damage? Was the miss discovered by others first, or explained away with excuses?"
+        },
+        {
+          "index": 3,
+          "score": "18",
+          "probe": "Give me an example of a result you were responsible for that did not turn out as planned. What did you learn?",
+          "guide": "Did the candidate take ownership of the outcome and draw specific, applied lessons? Was there deflection to others or lessons too general to be useful?"
+        },
+        {
+          "index": 4,
+          "score": "19",
+          "probe": "Tell me about a time you followed through on something long after others had lost interest.",
+          "guide": "Did the candidate keep the commitment through to completion because it mattered, not because they were checked on? Was the follow-through prompted only by a manager?"
+        },
+        {
+          "index": 5,
+          "score": "20",
+          "probe": "Describe a time you had to hold yourself to a standard higher than what was required.",
+          "guide": "Did the candidate set and meet a higher bar on their own, with a clear reason why it mattered? Was the higher standard really perfectionism that delayed the work?"
+        }
+      ]
+    },
+    {
+      "id": "Adaptability",
+      "name": "Adaptability & Resilience",
+      "displayName": "Adaptability & Resilience",
+      "description": "Stays effective through change, ambiguity, pressure and setbacks, and recovers quickly.",
+      "custom": false,
+      "questions": [
+        {
+          "index": 1,
+          "score": "21",
+          "probe": "Tell me about a time your priorities or plans changed suddenly. How did you adjust?",
+          "guide": "Did the candidate accept the change, re-plan quickly and keep delivering? Was there prolonged resistance, complaining, or loss of productivity?"
+        },
+        {
+          "index": 2,
+          "score": "22",
+          "probe": "Describe a setback or failure that hit you hard. How did you recover?",
+          "guide": "Did the candidate acknowledge the impact, take constructive steps and bounce back within a reasonable time? Was there lasting discouragement, blaming, or denial that it happened?"
+        },
+        {
+          "index": 3,
+          "score": "23",
+          "probe": "Give me an example of a time you had to work with unclear goals or very little direction.",
+          "guide": "Did the candidate create structure: clarifying what they could, setting interim goals and moving forward? Was there paralysis, or charging ahead without checking direction?"
+        },
+        {
+          "index": 4,
+          "score": "24",
+          "probe": "Tell me about the most stressful period in your work so far. How did you manage the pressure?",
+          "guide": "Did the candidate use specific strategies such as prioritizing, asking for support, and protecting quality to stay effective? Was there evidence of burnout behaviors, short temper, or slipping quality without action?"
+        },
+        {
+          "index": 5,
+          "score": "25",
+          "probe": "Describe a time you had to learn a new way of working, such as a system, process or role, quickly.",
+          "guide": "Did the candidate approach it with curiosity, learn efficiently and become productive? Was there reluctance, or reverting to the old way?"
+        }
+      ]
+    },
+    {
+      "id": "Decision_Making",
+      "name": "Decision Making",
+      "displayName": "Decision Making",
+      "description": "Makes timely, sound decisions by weighing evidence, risk and impact, and stands behind them.",
+      "custom": false,
+      "questions": [
+        {
+          "index": 1,
+          "score": "26",
+          "probe": "Tell me about a difficult decision you made with incomplete information. How did you decide?",
+          "guide": "Did the candidate gather what they reasonably could, weigh options and risks, decide in time and explain the reasoning? Was there endless delay, or a snap decision with no reasoning?"
+        },
+        {
+          "index": 2,
+          "score": "27",
+          "probe": "Describe a decision you made that turned out to be wrong. What did you do once you realized it?",
+          "guide": "Did the candidate recognize the error quickly, change course and learn from how they decided? Was there defending the decision too long, or hiding the outcome?"
+        },
+        {
+          "index": 3,
+          "score": "28",
+          "probe": "Give me an example of a time you had to choose between two good options. What made you pick one?",
+          "guide": "Did the candidate use clear criteria tied to the goal and consider who would be affected? Was the choice arbitrary, or made just to avoid conflict?"
+        },
+        {
+          "index": 4,
+          "score": "29",
+          "probe": "Tell me about a time you made an unpopular decision. How did you handle the reaction?",
+          "guide": "Did the candidate listen to concerns, explain the reasoning openly and stay firm where it was justified? Was there caving to pressure without reason, or ignoring valid objections?"
+        },
+        {
+          "index": 5,
+          "score": "30",
+          "probe": "Describe a time you decided not to act, or chose to escalate rather than decide yourself. Why?",
+          "guide": "Did the candidate show good judgment about the limits of their authority and when to involve others? Was this a pattern of avoiding responsibility?"
+        }
+      ]
+    },
+    {
+      "id": "Initiative",
+      "name": "Initiative",
+      "displayName": "Initiative",
+      "description": "Acts without being asked, spots opportunities, and goes beyond the minimum to improve results.",
+      "custom": false,
+      "questions": [
+        {
+          "index": 1,
+          "score": "31",
+          "probe": "Tell me about something you improved at work that nobody asked you to.",
+          "guide": "Did the candidate spot the opportunity themselves, act on it with appropriate buy-in and produce a real result? Was it an idea never carried out, or a change made without regard for others?"
+        },
+        {
+          "index": 2,
+          "score": "32",
+          "probe": "Describe a time you saw a problem coming before others did. What did you do?",
+          "guide": "Did the candidate act early to prevent or reduce the problem and alert the right people? Was there 'I told you so' after the fact with no action at the time?"
+        },
+        {
+          "index": 3,
+          "score": "33",
+          "probe": "Give me an example of a goal you set for yourself that went beyond your job requirements.",
+          "guide": "Did the candidate set a stretch goal, plan for it and pursue it with persistence? Was the goal vague, or abandoned quickly?"
+        },
+        {
+          "index": 4,
+          "score": "34",
+          "probe": "Tell me about a time you took on a responsibility outside your comfort zone.",
+          "guide": "Did the candidate volunteer, prepare and deliver despite the uncertainty? Was the responsibility assigned rather than taken on, or avoided?"
+        },
+        {
+          "index": 5,
+          "score": "35",
+          "probe": "Describe a time you kept working on something when progress was slow or obstacles kept appearing.",
+          "guide": "Did the candidate show persistence: finding new approaches and staying motivated toward the goal? Was there giving up at the first real obstacle?"
+        }
+      ]
+    },
+    {
+      "id": "Customer_Focus",
+      "name": "Customer Focus",
+      "displayName": "Customer Focus",
+      "description": "Understands and meets the needs of customers, internal or external, and builds trust through service.",
+      "custom": false,
+      "questions": [
+        {
+          "index": 1,
+          "score": "36",
+          "probe": "Tell me about a time you went out of your way to meet a customer's or colleague's need.",
+          "guide": "Did the candidate understand the real need, act on it and confirm the person was satisfied? Was the 'extra mile' really just the basic job, or done at an unreasonable cost?"
+        },
+        {
+          "index": 2,
+          "score": "37",
+          "probe": "Describe a time you dealt with a dissatisfied or upset customer. What did you do?",
+          "guide": "Did the candidate stay calm, listen, take ownership and resolve the issue or set clear expectations? Was there defensiveness, passing the person along, or promising what could not be delivered?"
+        },
+        {
+          "index": 3,
+          "score": "38",
+          "probe": "Give me an example of how you found out what a customer or stakeholder really needed, beyond what they first asked for.",
+          "guide": "Did the candidate ask probing questions and uncover the underlying need? Did they deliver only what was literally asked?"
+        },
+        {
+          "index": 4,
+          "score": "39",
+          "probe": "Tell me about a time you had to say no to a customer or stakeholder. How did you handle it?",
+          "guide": "Did the candidate explain the reason honestly, offer alternatives and keep the relationship intact? Was there avoidance, or a refusal with no explanation?"
+        },
+        {
+          "index": 5,
+          "score": "40",
+          "probe": "Describe a change you made based on customer or user feedback.",
+          "guide": "Did the candidate actively seek feedback, act on it and check whether the change helped? Was feedback collected but ignored?"
+        }
+      ]
+    },
+    {
+      "id": "Planning_Organization",
+      "name": "Planning & Organization",
+      "displayName": "Planning & Organization",
+      "description": "Sets priorities, plans work and resources, manages time and keeps multiple commitments on track.",
+      "custom": false,
+      "questions": [
+        {
+          "index": 1,
+          "score": "41",
+          "probe": "Tell me about a time you had several important deadlines at once. How did you decide what to do first?",
+          "guide": "Did the candidate prioritize by impact and urgency, communicate trade-offs and deliver the critical items? Was everything treated as equal, or were deadlines missed without warning?"
+        },
+        {
+          "index": 2,
+          "score": "42",
+          "probe": "Walk me through how you planned a project or piece of work from start to finish.",
+          "guide": "Did the candidate define the goal, break the work into steps, estimate time and resources and track progress? Was there no real plan, or a plan never revisited?"
+        },
+        {
+          "index": 3,
+          "score": "43",
+          "probe": "Describe a time your plan fell apart partway through. What did you do?",
+          "guide": "Did the candidate re-plan quickly, protect the most important outcomes and keep people informed? Was there scrambling with no new plan, or silence until the deadline?"
+        },
+        {
+          "index": 4,
+          "score": "44",
+          "probe": "Give me an example of a system or habit you use to stay organized. How has it helped?",
+          "guide": "Did the candidate describe a concrete, consistently used method with a clear benefit? Was the answer vague, or did it rely on memory and luck?"
+        },
+        {
+          "index": 5,
+          "score": "45",
+          "probe": "Tell me about a time you had to coordinate work across several people. How did you keep it on track?",
+          "guide": "Did the candidate set clear roles, timelines and check-ins and handle slippage early? Was there confusion about who owned what?"
+        }
+      ]
+    },
+    {
+      "id": "Conflict_Resolution",
+      "name": "Conflict Resolution",
+      "displayName": "Conflict Resolution",
+      "description": "Addresses disagreements directly and respectfully, finds common ground, and preserves working relationships.",
+      "custom": false,
+      "questions": [
+        {
+          "index": 1,
+          "score": "46",
+          "probe": "Tell me about a disagreement you had with a coworker. How was it resolved?",
+          "guide": "Did the candidate raise it directly, seek to understand the other view and reach a workable resolution? Was there avoidance, escalation as a first step, or 'winning' at the expense of the relationship?"
+        },
+        {
+          "index": 2,
+          "score": "47",
+          "probe": "Describe a time you disagreed with your manager's decision. What did you do?",
+          "guide": "Did the candidate voice the concern respectfully with reasons, then commit to the final decision? Was there silent disagreement, undermining, or refusal to move on?"
+        },
+        {
+          "index": 3,
+          "score": "48",
+          "probe": "Give me an example of when you helped two other people resolve a conflict.",
+          "guide": "Did the candidate stay neutral, help each side be heard and guide them toward a solution? Did they take sides, or impose a solution?"
+        },
+        {
+          "index": 4,
+          "score": "49",
+          "probe": "Tell me about a time someone criticized your work unfairly. How did you respond?",
+          "guide": "Did the candidate stay composed, look for any valid point and respond factually? Was there defensiveness, retaliation, or holding a grudge?"
+        },
+        {
+          "index": 5,
+          "score": "50",
+          "probe": "Describe a negotiation where you had to give something up to reach agreement.",
+          "guide": "Did the candidate know what mattered most, trade lower-priority items and reach a fair outcome? Was there giving in on everything, or refusing to give anything?"
+        }
+      ]
+    },
+    {
+      "id": "Learning_Agility",
+      "name": "Learning Agility",
+      "displayName": "Learning Agility",
+      "description": "Seeks feedback, learns quickly from experience, and applies new knowledge in new situations.",
+      "custom": false,
+      "questions": [
+        {
+          "index": 1,
+          "score": "51",
+          "probe": "Tell me about the most useful feedback you have received. What did you do with it?",
+          "guide": "Did the candidate accept the feedback openly and show a specific, lasting change? Was the feedback dismissed, or acknowledged with no change?"
+        },
+        {
+          "index": 2,
+          "score": "52",
+          "probe": "Describe a time you had to get up to speed on an unfamiliar subject quickly.",
+          "guide": "Did the candidate use an efficient strategy, such as finding experts, focusing on essentials and practicing, and become effective fast? Was learning slow and unstructured?"
+        },
+        {
+          "index": 3,
+          "score": "53",
+          "probe": "Give me an example of a lesson from one job or situation that you applied somewhere completely different.",
+          "guide": "Did the candidate show they can transfer learning across contexts with a concrete result? Was the lesson generic, or never applied?"
+        },
+        {
+          "index": 4,
+          "score": "54",
+          "probe": "Tell me about a skill you deliberately set out to improve in the last year or two. How did you do it?",
+          "guide": "Did the candidate set a goal, practice and measure progress on their own initiative? Was development left entirely to formal training or a manager?"
+        },
+        {
+          "index": 5,
+          "score": "55",
+          "probe": "Describe a time you realized your usual approach was not working. What did you change?",
+          "guide": "Did the candidate notice the problem, reflect on why and try something genuinely different? Was there repeating the same approach and expecting a different result?"
+        }
+      ]
+    },
+    {
+      "id": "Integrity",
+      "name": "Integrity",
+      "displayName": "Integrity",
+      "description": "Acts honestly and ethically, keeps confidences, and does the right thing when it is difficult.",
+      "custom": false,
+      "questions": [
+        {
+          "index": 1,
+          "score": "56",
+          "probe": "Tell me about a time you were asked or tempted to cut a corner. What did you do?",
+          "guide": "Did the candidate refuse to compromise standards, explain why and find a legitimate way forward? Was there rationalizing the shortcut, or going along to avoid friction?"
+        },
+        {
+          "index": 2,
+          "score": "57",
+          "probe": "Describe a situation where doing the right thing was going to cost you or your team something.",
+          "guide": "Did the candidate act ethically despite the cost and handle it transparently? Did the candidate struggle to give a real example, or describe an easy choice?"
+        },
+        {
+          "index": 3,
+          "score": "58",
+          "probe": "Give me an example of when you had to handle confidential or sensitive information.",
+          "guide": "Did the candidate protect the information, share it only with those who needed it and resist pressure to disclose? Was there carelessness, or casual sharing?"
+        },
+        {
+          "index": 4,
+          "score": "59",
+          "probe": "Tell me about a time you noticed someone else doing something wrong at work. How did you respond?",
+          "guide": "Did the candidate respond proportionately: addressing it directly or through the right channel? Was there ignoring it to avoid trouble, or overreacting without the facts?"
+        },
+        {
+          "index": 5,
+          "score": "60",
+          "probe": "Describe a time you had to admit you did not know something, or that you were wrong, in front of others.",
+          "guide": "Did the candidate show honesty and humility under some social pressure? Was there bluffing, or hiding the gap?"
+        }
+      ]
+    },
+    {
+      "id": "Leadership_Influence",
+      "name": "Leadership & Influence",
+      "displayName": "Leadership & Influence",
+      "description": "Sets direction, motivates and develops others, and wins support for ideas, with or without formal authority.",
+      "custom": false,
+      "questions": [
+        {
+          "index": 1,
+          "score": "61",
+          "probe": "Tell me about a time you led a group toward a goal, formally or informally. How did you get people moving in the same direction?",
+          "guide": "Did the candidate set a clear goal, involve others and keep momentum to a result? Was 'leading' just assigning tasks, or doing everything themselves?"
+        },
+        {
+          "index": 2,
+          "score": "62",
+          "probe": "Describe a time you persuaded someone to support an idea they initially resisted.",
+          "guide": "Did the candidate understand the other person's concerns, build a case around them and earn real agreement? Was there pressure, rank-pulling, or giving up quickly?"
+        },
+        {
+          "index": 3,
+          "score": "63",
+          "probe": "Give me an example of how you helped someone else grow or improve their performance.",
+          "guide": "Did the candidate give specific feedback, support and opportunities with a visible result for the other person? Was the 'help' just doing the work for them?"
+        },
+        {
+          "index": 4,
+          "score": "64",
+          "probe": "Tell me about a time you had to motivate a group whose morale was low.",
+          "guide": "Did the candidate find the real cause, communicate honestly and take concrete steps that helped? Was there empty cheerleading, or ignoring the problem?"
+        },
+        {
+          "index": 5,
+          "score": "65",
+          "probe": "Describe a time you had to step back and let someone else lead. How did you support them?",
+          "guide": "Did the candidate recognize when another person was better placed and actively support their success? Was there competition, second-guessing, or disengagement?"
+        }
+      ]
+    }
+  ]
+}

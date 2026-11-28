@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 560" width="100%" role="img" aria-labelledby="t d">
+  <title id="t">How TrueHire scores a candidate</title>
+  <desc id="d">Left: the evidence scale, where anchor 5 is worth 100 points and anchor 1 is worth 20, while insufficient evidence and unrated are excluded. Right: a worked example in which three rated categories with weights 3, 2 and 1 score 100, 80 and 40, an insufficient category drops out, and the weighted mean is 83.</desc>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0B2C45"/>
+      <stop offset="1" stop-color="#1E2A5C"/>
+    </linearGradient>
+    <clipPath id="frame"><rect width="1200" height="560" rx="24"/></clipPath>
+  </defs>
+  <g clip-path="url(#frame)" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">
+    <rect width="1200" height="560" fill="url(#sky)"/>
+
+    <text x="60" y="74" font-size="18" font-weight="600" letter-spacing="3" fill="#F5A623">SCORING</text>
+    <text x="60" y="118" font-size="36" font-weight="700" fill="#F7F4EC">Evidence in, a defensible rank out</text>
+
+    <text x="60" y="170" font-size="20" font-weight="600" fill="#B9C6D6">Evidence scale</text>
+    <g font-size="20">
+      <text x="60" y="214" font-weight="700" fill="#F7F4EC">5</text>
+      <rect x="92" y="196" width="300" height="24" rx="6" fill="#F5A623"/>
+      <text x="406" y="214" fill="#F7F4EC">100</text>
+
+      <text x="60" y="256" font-weight="700" fill="#F7F4EC">4</text>
+      <rect x="92" y="238" width="240" height="24" rx="6" fill="#F5A623" fill-opacity="0.85"/>
+      <text x="346" y="256" fill="#F7F4EC">80</text>
+
+      <text x="60" y="298" font-weight="700" fill="#F7F4EC">3</text>
+      <rect x="92" y="280" width="180" height="24" rx="6" fill="#F5A623" fill-opacity="0.7"/>
+      <text x="286" y="298" fill="#F7F4EC">60</text>
+
+      <text x="60" y="340" font-weight="700" fill="#F7F4EC">2</text>
+      <rect x="92" y="322" width="120" height="24" rx="6" fill="#F5A623" fill-opacity="0.55"/>
+      <text x="226" y="340" fill="#F7F4EC">40</text>
+
+      <text x="60" y="382" font-weight="700" fill="#F7F4EC">1</text>
+      <rect x="92" y="364" width="60" height="24" rx="6" fill="#F5A623" fill-opacity="0.4"/>
+      <text x="166" y="382" fill="#F7F4EC">20</text>
+
+      <text x="60" y="424" font-weight="700" fill="#8FA3B8">0</text>
+      <text x="92" y="424" fill="#8FA3B8">insufficient evidence · excluded</text>
+      <text x="48" y="462" font-weight="700" fill="#8FA3B8">−1</text>
+      <text x="92" y="462" fill="#8FA3B8">not yet rated · excluded</text>
+    </g>
+    <text x="60" y="512" font-size="18" fill="#B9C6D6">Points = anchor × 20. Missing data never counts as a low score.</text>
+
+    <line x1="560" y1="160" x2="560" y2="500" stroke="#FFFFFF" stroke-opacity="0.15"/>
+
+    <text x="600" y="170" font-size="20" font-weight="600" fill="#B9C6D6">Worked example</text>
+    <g font-size="20">
+      <text x="600" y="212" font-size="18" font-weight="600" fill="#8FA3B8">CATEGORY</text>
+      <text x="930" y="212" font-size="18" font-weight="600" fill="#8FA3B8" text-anchor="end">WEIGHT</text>
+      <text x="1040" y="212" font-size="18" font-weight="600" fill="#8FA3B8" text-anchor="end">ANCHOR</text>
+      <text x="1140" y="212" font-size="18" font-weight="600" fill="#8FA3B8" text-anchor="end">POINTS</text>
+
+      <text x="600" y="254" fill="#F7F4EC">Analytical Problem Solving</text>
+      <text x="930" y="254" fill="#F7F4EC" text-anchor="end">3</text>
+      <text x="1040" y="254" fill="#F7F4EC" text-anchor="end">5</text>
+      <text x="1140" y="254" fill="#F5A623" font-weight="700" text-anchor="end">100</text>
+
+      <text x="600" y="294" fill="#F7F4EC">Spoken Communication</text>
+      <text x="930" y="294" fill="#F7F4EC" text-anchor="end">2</text>
+      <text x="1040" y="294" fill="#F7F4EC" text-anchor="end">4</text>
+      <text x="1140" y="294" fill="#F5A623" font-weight="700" text-anchor="end">80</text>
+
+      <text x="600" y="334" fill="#F7F4EC">Interaction</text>
+      <text x="930" y="334" fill="#F7F4EC" text-anchor="end">1</text>
+      <text x="1040" y="334" fill="#F7F4EC" text-anchor="end">2</text>
+      <text x="1140" y="334" fill="#F5A623" font-weight="700" text-anchor="end">40</text>
+
+      <text x="600" y="374" fill="#8FA3B8">Leadership</text>
+      <text x="930" y="374" fill="#8FA3B8" text-anchor="end">1</text>
+      <text x="1040" y="374" fill="#8FA3B8" text-anchor="end">0</text>
+      <text x="1140" y="374" fill="#8FA3B8" text-anchor="end">—</text>
+      <line x1="600" y1="368" x2="1140" y2="368" stroke="#8FA3B8" stroke-opacity="0.6"/>
+    </g>
+
+    <rect x="600" y="404" width="540" height="96" rx="14" fill="#F5A623" fill-opacity="0.12" stroke="#F5A623" stroke-opacity="0.55"/>
+    <text x="624" y="442" font-size="20" fill="#F7F4EC">(3·100 + 2·80 + 1·40) ÷ (3 + 2 + 1)</text>
+    <text x="624" y="478" font-size="18" fill="#B9C6D6">Leadership’s weight leaves the denominator</text>
+    <text x="1116" y="470" font-size="44" font-weight="700" fill="#F5A623" text-anchor="end">83</text>
+  </g>
+</svg>
