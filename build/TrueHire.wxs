@@ -27,8 +27,10 @@
     <MajorUpgrade DowngradeErrorMessage="A newer version of TrueHire is already installed." />
     <MediaTemplate EmbedCab="yes" />
 
-    <Icon Id="TrueHireIcon" SourceFile="$(var.StageDir)\icon.ico" />
-    <Property Id="ARPPRODUCTICON" Value="TrueHireIcon" />
+    <!-- The Icon Id must end in .ico or .exe or Windows shows a blank page
+         for the Start menu shortcut. -->
+    <Icon Id="TrueHire.ico" SourceFile="$(var.StageDir)\icon.ico" />
+    <Property Id="ARPPRODUCTICON" Value="TrueHire.ico" />
     <Property Id="ARPURLINFOABOUT" Value="https://github.com/HarrisonAlexander/TrueHire" />
     <Property Id="ARPNOMODIFY" Value="1" />
 
@@ -36,6 +38,8 @@
     <Property Id="ApplicationFolderName" Value="TrueHire" />
     <Property Id="WixAppFolder" Value="WixPerUserFolder" />
     <WixVariable Id="WixUILicenseRtf" Value="$(var.LicenseRtf)" />
+    <WixVariable Id="WixUIDialogBmp" Value="$(var.ArtDir)\dialog.bmp" />
+    <WixVariable Id="WixUIBannerBmp" Value="$(var.ArtDir)\banner.bmp" />
     <ui:WixUI Id="WixUI_Advanced" />
     <!-- WixUI_Advanced defaults per-user installs to %LOCALAPPDATA%\Apps;
          Windows' convention is %LOCALAPPDATA%\Programs. -->
@@ -60,13 +64,12 @@
       </Files>
     </ComponentGroup>
 
-    <!-- HKMU resolves to HKCU per-user and HKLM per-machine, giving the
-         shortcut a key path that is valid in both scopes. -->
+    <!-- Advertised shortcut: its icon comes from the Icon table above. -->
     <Component Id="Launcher" Directory="APPLICATIONFOLDER">
       <File Id="TrueHireExe" Source="$(var.StageDir)\TrueHire.exe" KeyPath="yes">
         <Shortcut Id="StartMenuShortcut" Directory="ProgramMenuFolder" Name="TrueHire"
                   Description="Behavioral interview analytics" WorkingDirectory="APPLICATIONFOLDER"
-                  Icon="TrueHireIcon" Advertise="yes" />
+                  Icon="TrueHire.ico" Advertise="yes" />
       </File>
     </Component>
   </Fragment>

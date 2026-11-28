@@ -7,7 +7,8 @@
     Stages the runtime tree (TrueHire.ps1, icon.ico, lib, views, data, images,
     LICENSE) into dist\obj\msi-stage, adds installed.flag and a small
     TrueHire.exe launcher compiled from build\AppLauncher.cs, then runs WiX v5
-    against build\TrueHire.wxs.
+    against build\TrueHire.wxs. The setup-dialog bitmaps in build\installer are
+    committed; regenerate them with build\installer\make_installer_art.py.
 
     Requires the .NET SDK plus the WiX v5 tool and UI extension:
         dotnet tool install --global wix --version 5.0.2
@@ -64,6 +65,7 @@ $lic = $lic.Replace('\', '\\').Replace('{', '\{').Replace('}', '\}') -replace "\
     -ext WixToolset.UI.wixext `
     -arch x64 `
     -d "Version=$Version" -d "StageDir=$stage" -d "LicenseRtf=$rtfPath" `
+    -d "ArtDir=$(Join-Path $PSScriptRoot 'installer')" `
     -o $msiPath
 if ($LASTEXITCODE -ne 0) { throw "wix build failed (exit $LASTEXITCODE)" }
 
