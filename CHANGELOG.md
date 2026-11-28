@@ -2,6 +2,15 @@
 
 All notable user-facing changes to TrueHire, newest first.
 
+## November 28, 2026
+
+### ✨ New & Improved
+
+- **Windows installer.** TrueHire now comes as an `.msi` that installs either
+  just for you (no admin rights needed) or for everyone on the computer. It
+  adds a Start menu shortcut and a normal uninstall entry, and your data stays
+  in `%APPDATA%\TrueHire\` when you uninstall.
+
 ## November 27, 2026
 
 ### ✨ New & Improved

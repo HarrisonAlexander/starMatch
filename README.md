@@ -153,6 +153,7 @@ Install-Module ImportExcel -Scope CurrentUser
 | Default | `%APPDATA%\TrueHire\` | Nothing to do |
 | Portable | `<app folder>\userdata\` | Put an empty `portable.flag` file next to `TrueHire.ps1` |
 | Packaged `.exe` | `<exe folder>\userdata\` | Set automatically by the launcher |
+| Installed (MSI) | `%APPDATA%\TrueHire\`, with logs and outputs | Set automatically by the installer |
 
 Records are plain JSON. **Backup / Export All** writes a `.truehire.zip` bundle that you can import on another machine. Re-importing the same bundle merges by job, so it never creates duplicates.
 
@@ -209,6 +210,23 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\build\Build-Exe.ps1
 
 This produces `dist\TrueHire.exe`, a small .NET launcher compiled with the `csc.exe` that ships with Windows. The app's scripts are embedded inside it as a zip. On first run it extracts them to `%LOCALAPPDATA%\TrueHire\<hash>\` and starts PowerShell against that copy. To distribute it, attach the `.exe` to a GitHub Release rather than committing it.
 
+## Build the MSI installer
+
+```powershell
+dotnet tool install --global wix --version 5.0.2      # one time
+wix extension add -g WixToolset.UI.wixext/5.0.2       # one time
+powershell -NoProfile -ExecutionPolicy Bypass -File .\build\Build-Msi.ps1 -Version 1.0.0
+```
+
+This produces `dist\TrueHire-1.0.0.msi`. The installer asks whether to install **just for you** (to `%LOCALAPPDATA%\Programs\TrueHire`, no admin rights needed) or **for everyone on this computer** (to `Program Files\TrueHire`, which asks for admin). It adds a Start menu shortcut and an entry in **Installed apps**. Uninstalling removes the program but leaves your data in `%APPDATA%\TrueHire\`.
+
+For scripted installs:
+
+```powershell
+msiexec /i TrueHire-1.0.0.msi /qn MSIINSTALLPERUSER=1   # just for you
+msiexec /i TrueHire-1.0.0.msi /qn ALLUSERS=1            # everyone (run elevated)
+```
+
 ## Project layout
 
 ```text
@@ -219,7 +237,7 @@ This produces `dist\TrueHire.exe`, a small .NET launcher compiled with the `csc.
 ├── assets/readme/                      README artwork (sources in assets/readme/source)
 ├── test/                               smoke and launch tests
 ├── tools/                              demo-data generator, screenshot capture, reset script
-├── build/                              exe launcher source and build script
+├── build/                              exe and MSI build scripts, launcher sources
 └── docs/                               scoring explainers, design specs and plans, screenshots
 ```
 

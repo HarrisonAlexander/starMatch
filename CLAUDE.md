@@ -176,6 +176,13 @@ These patterns look reasonable but bite under PowerShell 5.1 + WPF.
   (compiled with the framework `csc.exe` from `build/Launcher.cs`) that embeds a
   zip of the runtime tree, extracts it to `%LOCALAPPDATA%\TrueHire\<hash>\`, and
   launches `powershell.exe` against it with `TRUEHIRE_DATA_ROOT=<exeDir>\userdata`.
+- `build/Build-Msi.ps1` produces `dist/TrueHire-<version>.msi` (WiX v5,
+  `build/TrueHire.wxs`, `Scope="perUserOrMachine"` with the WixUI_Advanced
+  scope dialog). It installs the plain script tree plus a non-extracting
+  launcher (`build/AppLauncher.cs`) and an `installed.flag` marker. The marker
+  makes `TrueHire.ps1` set `$Script:StateDir` to `%APPDATA%\TrueHire` so
+  `logs\` and `outputs\` never write into a read-only Program Files folder.
+  Keep the `UpgradeCode` fixed; bump `-Version` for each release.
 - Rebuild after any source change you want reflected in the `.exe`. `dist/` is
   gitignored; publish the exe as a GitHub Release asset.
 - `logs/`, `outputs/`, `userdata/` and `portable.flag` are runtime state and are

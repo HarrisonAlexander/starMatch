@@ -20,7 +20,7 @@ Naming convention mirrors the HTML outputs:
 # Resolve outputs dir if HtmlOutput.ps1 hasn't already done it. Both files
 # write into the same .\outputs\ directory next to TrueHire.ps1.
 if (-not $Script:OutputsDir) {
-    $outBase = if ($Script:RootDir) { $Script:RootDir } else { Split-Path -Parent $PSCommandPath | Split-Path -Parent }
+    $outBase = if ($Script:StateDir) { $Script:StateDir } else { Split-Path -Parent $PSCommandPath | Split-Path -Parent }
     $Script:OutputsDir = Join-Path $outBase 'outputs'
     if (-not (Test-Path -LiteralPath $Script:OutputsDir)) {
         New-Item -ItemType Directory -Path $Script:OutputsDir -Force | Out-Null

@@ -16,7 +16,7 @@ the same day don't clobber each other.
 #>
 
 # Resolve the outputs directory. Same fallback logic as Logging.ps1.
-$outBase = if ($Script:RootDir) { $Script:RootDir } else { Split-Path -Parent $PSCommandPath | Split-Path -Parent }
+$outBase = if ($Script:StateDir) { $Script:StateDir } else { Split-Path -Parent $PSCommandPath | Split-Path -Parent }
 $Script:OutputsDir = Join-Path $outBase 'outputs'
 if (-not (Test-Path -LiteralPath $Script:OutputsDir)) {
     New-Item -ItemType Directory -Path $Script:OutputsDir -Force | Out-Null

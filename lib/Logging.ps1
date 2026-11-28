@@ -20,10 +20,10 @@ The session boot writes a single "===== Session start =====" banner so
 multiple runs in one day are visually separable.
 #>
 
-# Resolve the log directory. $Script:RootDir is set by TrueHire.ps1 before
+# Resolve the log directory. $Script:StateDir is set by TrueHire.ps1 before
 # this file is dot-sourced in production; tests dot-source the libs
 # independently, so fall back to walking up from $PSCommandPath.
-$logBase = if ($Script:RootDir) { $Script:RootDir } else { Split-Path -Parent $PSCommandPath | Split-Path -Parent }
+$logBase = if ($Script:StateDir) { $Script:StateDir } else { Split-Path -Parent $PSCommandPath | Split-Path -Parent }
 $Script:LogDir = Join-Path $logBase 'logs'
 if (-not (Test-Path -LiteralPath $Script:LogDir)) {
     New-Item -ItemType Directory -Path $Script:LogDir -Force | Out-Null

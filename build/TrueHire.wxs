@@ -1,0 +1,73 @@
+<!--
+  TrueHire.wxs - MSI definition, built by build\Build-Msi.ps1 (WiX v5).
+
+  Dual-purpose package (Scope="perUserOrMachine"). The WixUI_Advanced dialogs
+  ask "just for you" or "everyone on this computer":
+    per-user    -> %LOCALAPPDATA%\Programs\TrueHire, no admin prompt
+    per-machine -> Program Files\TrueHire, elevates
+  Silent installs choose with properties:
+    msiexec /i TrueHire.msi /qn MSIINSTALLPERUSER=1     (per-user)
+    msiexec /i TrueHire.msi /qn ALLUSERS=1              (per-machine)
+
+  installed.flag tells TrueHire.ps1 to write logs\ and outputs\ under
+  %APPDATA%\TrueHire\ (with the user's data) because the install folder may
+  be read-only. User data is never touched by install or uninstall.
+-->
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs"
+     xmlns:ui="http://wixtoolset.org/schemas/v4/wxs/ui">
+
+  <Package Name="TrueHire"
+           Manufacturer="Harrison Alexander"
+           Version="$(var.Version)"
+           UpgradeCode="6D1F5A0E-3B7C-4E2A-9A61-7C2E4B8D1F35"
+           Scope="perUserOrMachine"
+           Compressed="yes">
+
+    <SummaryInformation Description="TrueHire - Behavioral Interview Analytics" />
+    <MajorUpgrade DowngradeErrorMessage="A newer version of TrueHire is already installed." />
+    <MediaTemplate EmbedCab="yes" />
+
+    <Icon Id="TrueHireIcon" SourceFile="$(var.StageDir)\icon.ico" />
+    <Property Id="ARPPRODUCTICON" Value="TrueHireIcon" />
+    <Property Id="ARPURLINFOABOUT" Value="https://github.com/HarrisonAlexander/TrueHire" />
+    <Property Id="ARPNOMODIFY" Value="1" />
+
+    <!-- WixUI_Advanced: install-scope choice, default "just for you". -->
+    <Property Id="ApplicationFolderName" Value="TrueHire" />
+    <Property Id="WixAppFolder" Value="WixPerUserFolder" />
+    <WixVariable Id="WixUILicenseRtf" Value="$(var.LicenseRtf)" />
+    <ui:WixUI Id="WixUI_Advanced" />
+    <!-- WixUI_Advanced defaults per-user installs to %LOCALAPPDATA%\Apps;
+         Windows' convention is %LOCALAPPDATA%\Programs. -->
+    <SetProperty Id="WixPerUserFolder" Value="[LocalAppDataFolder]Programs\[ApplicationFolderName]"
+                 After="WixSetDefaultPerUserFolder" Sequence="both" />
+
+    <StandardDirectory Id="ProgramFiles6432Folder">
+      <Directory Id="APPLICATIONFOLDER" Name="TrueHire" />
+    </StandardDirectory>
+    <StandardDirectory Id="ProgramMenuFolder" />
+
+    <Feature Id="Main" Title="TrueHire" Level="1">
+      <ComponentGroupRef Id="AppFiles" />
+      <ComponentRef Id="Launcher" />
+    </Feature>
+  </Package>
+
+  <Fragment>
+    <ComponentGroup Id="AppFiles" Directory="APPLICATIONFOLDER">
+      <Files Include="$(var.StageDir)\**">
+        <Exclude Files="$(var.StageDir)\TrueHire.exe" />
+      </Files>
+    </ComponentGroup>
+
+    <!-- HKMU resolves to HKCU per-user and HKLM per-machine, giving the
+         shortcut a key path that is valid in both scopes. -->
+    <Component Id="Launcher" Directory="APPLICATIONFOLDER">
+      <File Id="TrueHireExe" Source="$(var.StageDir)\TrueHire.exe" KeyPath="yes">
+        <Shortcut Id="StartMenuShortcut" Directory="ProgramMenuFolder" Name="TrueHire"
+                  Description="Behavioral interview analytics" WorkingDirectory="APPLICATIONFOLDER"
+                  Icon="TrueHireIcon" Advertise="yes" />
+      </File>
+    </Component>
+  </Fragment>
+</Wix>

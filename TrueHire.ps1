@@ -23,6 +23,13 @@ $ErrorActionPreference = 'Stop'
 # ---------- Locate root and load WPF assemblies ----------
 $Script:RootDir = Split-Path -Parent $PSCommandPath
 
+# Writable base for logs\ and outputs\. The MSI ships installed.flag next to
+# this script because Program Files is read-only for normal users, so an
+# installed copy writes them under %APPDATA%\TrueHire\ instead.
+$Script:StateDir = if (Test-Path -LiteralPath (Join-Path $Script:RootDir 'installed.flag')) {
+    Join-Path $env:APPDATA 'TrueHire'
+} else { $Script:RootDir }
+
 Add-Type -AssemblyName PresentationFramework
 Add-Type -AssemblyName PresentationCore
 Add-Type -AssemblyName WindowsBase
